@@ -1,5 +1,7 @@
 package com.bl.crudoperation.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,14 +10,16 @@ import javax.persistence.Id;
 public class Person {
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
     private String name;
+    private String contactNumber;
+    private String time;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -27,11 +31,11 @@ public class Person {
         this.name = name;
     }
 
-    public long getContactNumber() {
+    public String getContactNumber() {
         return contactNumber;
     }
 
-    public void setContactNumber(long contactNumber) {
+    public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
 
@@ -42,7 +46,4 @@ public class Person {
     public void setTime(String time) {
         this.time = time;
     }
-
-    private long contactNumber;
-    private String time;
 }
