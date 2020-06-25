@@ -2,12 +2,9 @@ package com.bl.crudoperation.repository;
 
 import com.bl.crudoperation.model.Person;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.simple.JSONArray;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -45,5 +42,13 @@ public class PersonRepository implements IPersonRepository {
     @Override
     public Person displayById(long id) {
         return personList.stream().filter(person -> person.getId() == id).findAny().orElse(null);
+    }
+
+    @Override
+    public void update(long id, Person person) {
+        Person person1 = displayById(id);
+        person1.setName(person.getName());
+        person1.setContactNumber(person.getContactNumber());
+        save(person1);
     }
 }

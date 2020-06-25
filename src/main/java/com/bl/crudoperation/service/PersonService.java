@@ -27,4 +27,9 @@ public class PersonService implements IPersonService {
     public Person displayById(long id) {
         return personRepository.displayById(id);
     }
+
+    @Override
+    public void update(long id, Person person) {
+        personRepository.update(id,person);
+    }
 }

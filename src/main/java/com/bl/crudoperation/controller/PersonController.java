@@ -29,4 +29,9 @@ public class PersonController {
     public Person displayPerson(@PathVariable long id) {
         return personService.displayById(id);
     }
+
+    @PutMapping("/update/{id}")
+    public void updatePerson(@PathVariable long id, @RequestBody Person person) {
+        personService.update(id, person);
+    }
 }

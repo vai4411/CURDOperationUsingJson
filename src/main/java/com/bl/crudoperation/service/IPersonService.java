@@ -8,4 +8,5 @@ public interface IPersonService {
     void save(Person person);
     List display();
     Person displayById(long id);
+    void update(long id, Person person);
 }
