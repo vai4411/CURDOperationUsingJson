@@ -22,4 +22,9 @@ public class PersonService implements IPersonService {
     public List display() {
         return personRepository.display();
     }
+
+    @Override
+    public Person displayById(long id) {
+        return personRepository.displayById(id);
+    }
 }

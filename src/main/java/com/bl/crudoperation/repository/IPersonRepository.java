@@ -7,4 +7,5 @@ import java.util.List;
 public interface IPersonRepository {
     void save(Person person);
     List display();
+    Person displayById(long id);
 }

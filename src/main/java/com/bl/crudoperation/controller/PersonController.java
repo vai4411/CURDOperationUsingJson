@@ -21,7 +21,12 @@ public class PersonController {
     }
 
     @GetMapping("/displayAll")
-    public List displayPerson() {
+    public List displayAll() {
         return personService.display();
+    }
+
+    @GetMapping("/displayPerson/{id}")
+    public Person displayPerson(@PathVariable long id) {
+        return personService.displayById(id);
     }
 }

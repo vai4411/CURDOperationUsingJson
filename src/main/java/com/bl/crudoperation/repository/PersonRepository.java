@@ -37,4 +37,9 @@ public class PersonRepository implements IPersonRepository {
     public List display() {
         return personList;
     }
+
+    @Override
+    public Person displayById(long id) {
+        return personList.stream().filter(person -> person.getId() == id).findAny().orElse(null);
+    }
 }
