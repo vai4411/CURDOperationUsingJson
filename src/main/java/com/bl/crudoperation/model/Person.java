@@ -1,6 +1,9 @@
+/**********************************************************************
+ * @purpose : Person Model Used For Storing Data Into Object Form
+ * @author : Vaibhav Patil
+ * @date : 25/6/2020
+ **********************************************************************/
 package com.bl.crudoperation.model;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
