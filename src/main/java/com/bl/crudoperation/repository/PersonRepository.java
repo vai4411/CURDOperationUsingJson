@@ -20,17 +20,21 @@ public class PersonRepository implements IPersonRepository {
     private List<Person> personList = new ArrayList<>();
     private final AtomicLong counter = new AtomicLong();
 
-    public void save(Person person) {
-        person.setId(counter.incrementAndGet());
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        person.setTime(dtf.format(LocalDateTime.now()));
-        personList.add(person);
+    public void writeData(List personList) {
         ObjectMapper ob = new ObjectMapper();
         try {
             ob.writeValue(new File("./src/main/resources/person.json"),personList);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void save(Person person) {
+        person.setId(counter.incrementAndGet());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        person.setTime(dtf.format(LocalDateTime.now()));
+        personList.add(person);
+        writeData(personList);
     }
 
     @Override
