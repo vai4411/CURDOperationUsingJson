@@ -20,7 +20,7 @@ public class PersonController {
         personService.save(person);
     }
 
-    @GetMapping("/display")
+    @GetMapping("/displayAll")
     public List displayPerson() {
         return personService.display();
     }

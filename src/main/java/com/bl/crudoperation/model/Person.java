@@ -12,7 +12,7 @@ public class Person {
     @GeneratedValue
     private long id;
     private String name;
-    private String contactNumber;
+    private long contactNumber;
     private String time;
 
     public long getId() {
@@ -31,11 +31,11 @@ public class Person {
         this.name = name;
     }
 
-    public String getContactNumber() {
+    public long getContactNumber() {
         return contactNumber;
     }
 
-    public void setContactNumber(String contactNumber) {
+    public void setContactNumber(long contactNumber) {
         this.contactNumber = contactNumber;
     }
 
@@ -45,15 +45,5 @@ public class Person {
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", contactNumber='" + contactNumber + '\'' +
-                ", time='" + time + '\'' +
-                '}';
     }
 }
