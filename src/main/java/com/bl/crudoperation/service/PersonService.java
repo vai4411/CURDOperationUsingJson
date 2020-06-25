@@ -29,7 +29,12 @@ public class PersonService implements IPersonService {
     }
 
     @Override
-    public void update(long id, Person person) {
+    public void update(int id, Person person) {
         personRepository.update(id,person);
+    }
+
+    @Override
+    public void delete(int id) {
+        personRepository.delete(id);
     }
 }

@@ -9,15 +9,16 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
 public class PersonRepository implements IPersonRepository {
-    private List<Person> personList = new ArrayList<>();
+    private LinkedList<Person> personList = new LinkedList<>();
     private final AtomicLong counter = new AtomicLong();
 
-    public void writeData(List personList) {
+    public void writeData(LinkedList personList) {
         ObjectMapper ob = new ObjectMapper();
         try {
             ob.writeValue(new File("./src/main/resources/person.json"),personList);
@@ -27,10 +28,11 @@ public class PersonRepository implements IPersonRepository {
     }
 
     public void save(Person person) {
-        person.setId(counter.incrementAndGet());
+        long id = person.getId() != 0 ? person.getId() : counter.incrementAndGet();
+        person.setId(id);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         person.setTime(dtf.format(LocalDateTime.now()));
-        personList.add(person);
+        personList.add((int) id - 1,person);
         writeData(personList);
     }
 
@@ -45,10 +47,17 @@ public class PersonRepository implements IPersonRepository {
     }
 
     @Override
-    public void update(long id, Person person) {
+    public void update(int id, Person person) {
         Person person1 = displayById(id);
         person1.setName(person.getName());
         person1.setContactNumber(person.getContactNumber());
         save(person1);
+        delete(id);
+    }
+
+    @Override
+    public void delete(int id) {
+        personList.remove(id - 1);
+        writeData(personList);
     }
 }
