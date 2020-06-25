@@ -5,6 +5,8 @@ import com.bl.crudoperation.repository.IPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PersonService implements IPersonService {
 
@@ -14,5 +16,10 @@ public class PersonService implements IPersonService {
     @Override
     public void save(Person person) {
         personRepository.save(person);
+    }
+
+    @Override
+    public List display() {
+        return personRepository.display();
     }
 }

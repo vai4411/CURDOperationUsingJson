@@ -20,37 +20,21 @@ public class PersonRepository implements IPersonRepository {
     private List<Person> personList = new ArrayList<>();
     private final AtomicLong counter = new AtomicLong();
 
-//    public FileWriter getWriter() {
-//        FileWriter file = null;
-//        try {
-//            file = new FileWriter("./src/main/resources/person.json");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return file;
-//    }
-
-//    public void closeWriter() {
-//        try {
-////            getWriter().flush();
-//            getWriter().close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     public void save(Person person) {
         person.setId(counter.incrementAndGet());
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         person.setTime(dtf.format(LocalDateTime.now()));
         personList.add(person);
-        //            getWriter().write(person.toString());
-//            closeWriter();
         ObjectMapper ob = new ObjectMapper();
         try {
             ob.writeValue(new File("./src/main/resources/person.json"),personList);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List display() {
+        return personList;
     }
 }
