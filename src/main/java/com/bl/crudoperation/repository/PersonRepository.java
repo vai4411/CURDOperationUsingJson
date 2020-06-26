@@ -1,10 +1,10 @@
 /**********************************************************************
  * @purpose : Person Repository Used For Perform CURD Operation
  * @author : Vaibhav Patil
- * @date : 25/6/2020
  **********************************************************************/
 package com.bl.crudoperation.repository;
 
+import com.bl.crudoperation.Utils.DateAndTimeFormatUtil;
 import com.bl.crudoperation.model.Person;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Repository;
@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
@@ -40,11 +41,9 @@ public class PersonRepository implements IPersonRepository {
      * @param person
      */
     public void save(Person person) {
-        long id = person.getId() != 0 ? person.getId() : counter.incrementAndGet();
-        person.setId(id);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        person.setTime(dtf.format(LocalDateTime.now()));
-        personList.add((int) id - 1,person);
+        person.setId(counter.incrementAndGet());
+        person.setTime(DateAndTimeFormatUtil.currentDateAndTime());
+        personList.add(person);
         writeData(personList);
     }
 
@@ -64,7 +63,10 @@ public class PersonRepository implements IPersonRepository {
      */
     @Override
     public Person displayById(long id) {
-        return personList.stream().filter(person -> person.getId() == id).findAny().orElse(null);
+        return personList.stream()
+                .filter(person -> person.getId() == id)
+                .findAny()
+                .orElse(null);
     }
 
     /**+
@@ -77,8 +79,8 @@ public class PersonRepository implements IPersonRepository {
         Person person1 = displayById(id);
         person1.setName(person.getName());
         person1.setContactNumber(person.getContactNumber());
-        save(person1);
-        delete(id);
+        Collections.replaceAll(personList,person,person1);
+        writeData(personList);
     }
 
     /**+

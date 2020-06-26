@@ -1,7 +1,6 @@
 /**********************************************************************
  * @purpose : Person Service Interface Used For Managing Service
  * @author : Vaibhav Patil
- * @date : 25/6/2020
  **********************************************************************/
 package com.bl.crudoperation.service;
 
